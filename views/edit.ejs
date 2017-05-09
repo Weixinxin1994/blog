@@ -1,0 +1,32 @@
+<%include header%>
+<form action="/edit/<%= post.name %>/<%= post.time.minute %>/<%= post.title %>">
+    <label>标题:</label><br>
+    <input type="text" id="title" value="<%= post.title %>" disabled="disabled"><br>
+    <label>正文:</label><br>
+    <textarea cols="100" rows="10" id="post"><%= post.post %></textarea>
+    <center id="message" style="color: red"></center>
+    <input type="button" id="button" value="提交">
+</form>
+
+<script>
+    $(function () {
+        $("#button").click(function (e) {
+
+            e.preventDefault();
+            $.post("/post",{
+                title:$("#title").val(),
+                post:$("#post").val()
+
+            },function (result) {
+                console.log(result.message)
+                $("#message").html(result.message);
+                if(result.message=="success"){
+                    location.href="/article";
+                }
+
+            })
+        })
+    })
+
+</script>
+<%include footer%>

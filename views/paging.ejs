@@ -1,0 +1,13 @@
+<br />
+<div>
+    <% if (!isFirstPage) { %>
+    <span class="prepage">
+    <a class="button button-3d button-primary button-rounded" title="上一页" href="?p=<%= page-1 %>">上一页</a>
+    </span>
+    <% } %>
+    <% if (!isLastPage) { %>
+    <span>
+    <a class="button button-3d button-primary button-rounded" title="下一页" href="?p=<%= page+1 %>">下一页</a>
+    </span>
+    <% } %>
+</div>

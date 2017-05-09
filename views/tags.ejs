@@ -1,0 +1,5 @@
+<% include header %>
+<% posts.forEach(function(tag,index){ %>
+    <span style="display: inline-block; height:<%=parseInt((30)*Math.random())%>+ 'px';with:<%=parseInt((30)*Math.random())%>+'px'"><a class="<%=color[parseInt((3)*Math.random())]%>" href="/tags/<%= tag %>"><%= tag %></a></span>
+<%  }) %>
+<% include footer %>

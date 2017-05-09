@@ -1,0 +1,42 @@
+<% include header %>
+<form style="width: 1100px; margin: 130px auto;height: 100%">
+
+
+       <label style="font-size: 25px">标题:</label><br>
+       <input type="text" id="title"><br>
+       <label style="font-size: 25px">标签:</label><br>
+       <input type="text" id="tag1" style="font-size: 25px">
+       <input type="text" id="tag2" style="font-size: 25px">
+       <input type="text" id="tag3" style="font-size: 25px"><br>
+       <label style="font-size: 25px">正文:</label><br>
+       <textarea id="post" style="font-size: 25px;color: darkgray" cols="100" rows="10"></textarea><br>
+       <center id="message" style="color: red"></center>
+
+       <input type="button" id="button" style="font-size: 25px;margin-top: 10px;" value="发表">
+
+</form>
+<script>
+    $(function () {
+        $("#button").click(function (e) {
+
+            e.preventDefault();
+            $.post("/post",{
+                title:$("#title").val(),
+                tag1:$("#tag1").val(),
+                tag2:$("#tag2").val(),
+                tag3:$("#tag3").val(),
+                post:$("#post").val()
+
+            },function (result) {
+                console.log(result.message)
+                $("#message").html(result.message);
+                if(result.message=="success"){
+                    location.href="/article";
+                }
+
+            })
+            })
+        })
+
+</script>
+<% include footer %>

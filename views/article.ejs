@@ -1,0 +1,45 @@
+<%include header%>
+
+<div class="holder back">
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+</div>
+<div style=" margin: 50px auto;">
+            <% posts.forEach(function (post, index) {%>
+<div style="width: 80%; margin: 50px auto;border: solid 2px darkgray;border-radius: 10px">
+           <p><img src='/touxiang/<%=touxiangs[index]%>' class="img-circle"
+                   width="60"><h2><a href="/a/<%= post.name %>/<%= post.time.minute %>/<%= post.title %>"><%= post.title %></a></h2></p>
+            <p class="info" style="color:#5bc0de;font-size: 20px">
+                <i class="glyphicon glyphicon-user"></i>&nbsp;<a href="/u/<%= post.name %>"><%= post.name %></a> |
+                <i class="glyphicon glyphicon-calendar"></i>&nbsp;<%= post.time.minute %> |
+
+                <i class="glyphicon glyphicon-pushpin"></i>&nbsp;
+                <% post.tags.forEach(function (tag, index) { %>
+                <% if (tag) { %>
+                <a class="<%=color[index]%>" href="/tags/<%= tag %>"><%= tag %></a>
+                <% } %>
+                <% }) %>
+            </p>
+            <p class="article"><%-post.post %></p>
+    <p class="info"><i class="fa fa-heart"></i>&nbsp;&nbsp;&nbsp;阅读：<%= post.pv %> | <i class="fa fa-comment"></i>评论：<%= post.comments.length %></p>
+
+
+</div>
+            <% }) %>
+
+   <center><%- include paging %></center>
+
+</div>
+
+            <% include footer%>
+
+
+
+
+
+

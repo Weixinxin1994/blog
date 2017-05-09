@@ -1,0 +1,61 @@
+<%include header%>
+<center style="height: 1000px">
+<form  style="width: 40%" >
+    <div class="form-group">
+        <label for="">原用户名：<%=user.name%></label>
+        <input type="text" name="name" class="form-control" placeholder="请输入新用户名" autofocus>
+        <br>
+        <label for="">更改密码:</label>
+        <input type="password" name="password" class="form-control" placeholder="请输入新密码">
+        <br>
+        <label for="exampleInputFile">选择头像</label><br>
+<%touxiangs.forEach(function (touxiang,index) {%>
+    <img class="tximg" src="./touxiang/<%=touxiang%>"  data-index="<%=index%>" alt="">
+<%})%>
+
+
+        <select name="touxiang" id="tx">
+            <%touxiangs.forEach(function (touxiang,index) {%>
+            <option value="<%=touxiang%>"><%=index%></option>
+            <%})%>
+
+        </select>
+        <center id="message" style="color: red"></center>
+    </div>
+    
+
+    <button type="submit" class="btn btn-default" >确认修改</button>
+</form>
+</center>
+<%include footer%>
+
+
+    <script>
+//console.log($("img"));
+
+$("img").forEach(function (img,index) {
+    img.click=function () {
+        $("tx").prop('selectedIndex', index);
+        
+    }
+
+})
+
+    $(function () {
+        $("form").submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url:"/edituser",
+                method:"post",
+                data:$(this).serialize()
+            }).success(function (data) {
+                console.log(data.message);
+                $("#message").html(data.message);
+                if(data.message=="success"){
+                    location.href="/";
+                }
+
+            })
+        })
+    })
+</script>
